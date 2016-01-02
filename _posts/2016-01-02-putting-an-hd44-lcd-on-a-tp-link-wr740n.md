@@ -41,14 +41,12 @@ Because we already have busybox in openwrt and the speed is not an issue.
 So to setup the GPIOs I issue:
 
 ```
-
 #!/bin/sh
 echo none > /sys/class/leds/tp-link:green:lan3/trigger
 echo none > /sys/class/leds/tp-link:green:lan2/trigger
 
 ln -s /sys/class/leds/tp-link:green:lan2/brightness /tmp/date
 ln -s /sys/class/leds/tp-link:green:lan3/brightness /tmp/ceas
-
 ```
 
 Now I need a little scrip that will write the stdin to the lcd, no formating.
