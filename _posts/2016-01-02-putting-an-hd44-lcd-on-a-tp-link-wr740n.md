@@ -53,95 +53,105 @@ You have to know in advance what kind of LCD this is (1x16,1x8,2x16,4x20, etc.)
 
 So here it is, it will also reset the LCD on every call.
 
-```
-#!/bin/sh
-# lan2 alb date
-# lan3 verde ceas
+    #!/bin/sh
+    # lan2 alb date
+    # lan3 verde ceas
 
-echo 1 > /tmp/date
-echo 1 > /tmp/ceas
-
-scrieNible(){
-# stergere registru.
     echo 1 > /tmp/date
-    echo 0 > /tmp/ceas
-    echo 1 > /tmp/ceas
-    echo 0 > /tmp/ceas
-    echo 1 > /tmp/ceas
-    echo 0 > /tmp/ceas
-    echo 1 > /tmp/ceas
-    echo 0 > /tmp/ceas
-    echo 1 > /tmp/ceas
-    echo 0 > /tmp/ceas
-    echo 1 > /tmp/ceas
-    echo 0 > /tmp/ceas
     echo 1 > /tmp/ceas
 
-# scriem enable
-    echo 0 > /tmp/date
-    echo 0 > /tmp/ceas
-    echo 1 > /tmp/ceas
+    scrieNible(){
+    # stergere registru.
+        echo 1 > /tmp/date
+        echo 0 > /tmp/ceas
+        echo 1 > /tmp/ceas
+        echo 0 > /tmp/ceas
+        echo 1 > /tmp/ceas
+        echo 0 > /tmp/ceas
+        echo 1 > /tmp/ceas
+        echo 0 > /tmp/ceas
+        echo 1 > /tmp/ceas
+        echo 0 > /tmp/ceas
+        echo 1 > /tmp/ceas
+        echo 0 > /tmp/ceas
+        echo 1 > /tmp/ceas
 
-# scriem r/s
-    [ $1 -eq 1 ] && echo $1 > /tmp/date
-    echo 0 > /tmp/ceas
-    echo 1 > /tmp/ceas
+    # scriem enable
+        echo 0 > /tmp/date
+        echo 0 > /tmp/ceas
+        echo 1 > /tmp/ceas
 
-# scriem 3 2 1 0
-    [ $2 -eq $1 ] || echo $2 > /tmp/date
-    echo 0 > /tmp/ceas
-    echo 1 > /tmp/ceas
-    [ $3 -eq $2 ] || echo $3 > /tmp/date
-    echo 0 > /tmp/ceas
-    echo 1 > /tmp/ceas
-    [ $4 -eq $3 ] || echo $4 > /tmp/date
-    echo 0 > /tmp/ceas
-    echo 1 > /tmp/ceas
-    [ $5 -eq $4 ] || echo $5 > /tmp/date
-    echo 0 > /tmp/ceas
-    echo 1 > /tmp/ceas
+    # scriem r/s
+        [ $1 -eq 1 ] && echo $1 > /tmp/date
+        echo 0 > /tmp/ceas
+        echo 1 > /tmp/ceas
 
-# finalizare, ne asiguram ca E are fron negativ
-    [ $5 -eq 1 ] && echo 0 > /tmp/date
-    echo 1 > /tmp/date
-}
+    # scriem 3 2 1 0
+        [ $2 -eq $1 ] || echo $2 > /tmp/date
+        echo 0 > /tmp/ceas
+        echo 1 > /tmp/ceas
+        [ $3 -eq $2 ] || echo $3 > /tmp/date
+        echo 0 > /tmp/ceas
+        echo 1 > /tmp/ceas
+        [ $4 -eq $3 ] || echo $4 > /tmp/date
+        echo 0 > /tmp/ceas
+        echo 1 > /tmp/ceas
+        [ $5 -eq $4 ] || echo $5 > /tmp/date
+        echo 0 > /tmp/ceas
+        echo 1 > /tmp/ceas
 
-scrieNible 1 1 1 0 0
-scrieNible 1 1 1 0 0
-scrieNible 1 1 1 0 0
-scrieNible 1 1 1 0 0
-scrieNible 1 1 1 0 1
+    # finalizare, ne asiguram ca E are fron negativ
+        [ $5 -eq 1 ] && echo 0 > /tmp/date
+        echo 1 > /tmp/date
+    }
 
-scrieNible 1 1 1 0 1
-scrieNible 1 0 1 1 1
+    scrieNible 1 1 1 0 0
+    scrieNible 1 1 1 0 0
+    scrieNible 1 1 1 0 0
+    scrieNible 1 1 1 0 0
+    scrieNible 1 1 1 0 1
 
-scrieNible 1 1 1 1 1
-scrieNible 1 1 1 1 0
+    scrieNible 1 1 1 0 1
+    scrieNible 1 0 1 1 1
 
-scrieNible 1 1 1 1 1
-scrieNible 1 1 0 0 1
+    scrieNible 1 1 1 1 1
+    scrieNible 1 1 1 1 0
 
-scrieNible 1 1 1 1 1
-scrieNible 1 0 0 1 1
+    scrieNible 1 1 1 1 1
+    scrieNible 1 1 0 0 1
 
-hexdump -v -e '/1 "%02X"' | sed -e 's#.#\0\n#g' | sed -e '
-s#0#1 1 1 1#
-t
-s#1#0 1 1 1#
-t
-s#2#1 0 1 1#
-s#3#0 0 1 1#
-s#4#1 1 0 1#
-s#5#0 1 0 1#
-s#6#1 0 0 1#
-s#7#0 0 0 1#
-s#8#1 1 1 0#
-s#9#0 1 1 0#
-s#A#1 0 1 0#
-s#B#0 0 1 0#
-s#C#1 1 0 0#
-s#D#0 1 0 0#
-s#E#1 0 0 0#
-s#F#0 0 0 0#' | while read a b c d ; do scrieNible 0 $d $c $b $a ; done
-```
+    scrieNible 1 1 1 1 1
+    scrieNible 1 0 0 1 1
+
+    hexdump -v -e '/1 "%02X"' | sed -e 's#.#\0\n#g' | sed -e '
+    s#0#1 1 1 1#
+    t
+    s#1#0 1 1 1#
+    t
+    s#2#1 0 1 1#
+    s#3#0 0 1 1#
+    s#4#1 1 0 1#
+    s#5#0 1 0 1#
+    s#6#1 0 0 1#
+    s#7#0 0 0 1#
+    s#8#1 1 1 0#
+    s#9#0 1 1 0#
+    s#A#1 0 1 0#
+    s#B#0 0 1 0#
+    s#C#1 1 0 0#
+    s#D#0 1 0 0#
+    s#E#1 0 0 0#
+    s#F#0 0 0 0#' | while read a b c d ; do scrieNible 0 $d $c $b $a ; done
+
+So we have 2 layers in this script.
+
+The first one is the nible to bit banging layer. It is the "scrieNible".
+It flushes the CD4094 shift register.
+Then it populates the shift register with: RS, bit7, bit6, bit5, bit4.
+
+Now that we can write a nible, the second layer setups the LCD module,
+then it writes the input text to the LCD.
+It does no formatting so it will not interpret _LF_.
+What it does is convert to HEX and then send each nible to the lower layer.
+
 
