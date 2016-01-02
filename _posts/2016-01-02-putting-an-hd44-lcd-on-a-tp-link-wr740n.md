@@ -20,8 +20,8 @@ So I needed a low cost central control unit for my home automation.
 
 TP Link WR740N fit the bill.
 
-* It is low cost : 15$
-* It has a UART that can be used to manage a 1Wire bus.
+* It is low cost : 20$
+* It has an UART that can be used to manage a 1Wire bus.
 * It has 8 GPIOs.
 * It has a "usable" usb 2.0 that you can get to using this [mod](https://forum.openwrt.org/viewtopic.php?id=33991), I didn't go that far.
 
