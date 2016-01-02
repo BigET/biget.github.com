@@ -40,20 +40,13 @@ Because we already have busybox in openwrt and the speed is not an issue.
 
 So to setup the GPIOs I issue:
 
-```
-#!/bin/sh
-echo none > /sys/class/leds/tp-link:green:lan3/trigger
-echo none > /sys/class/leds/tp-link:green:lan2/trigger
+    #!/bin/sh
+    echo none > /sys/class/leds/tp-link:green:lan3/trigger
+    echo none > /sys/class/leds/tp-link:green:lan2/trigger
 
-ln -s /sys/class/leds/tp-link:green:lan2/brightness /tmp/date
-ln -s /sys/class/leds/tp-link:green:lan3/brightness /tmp/ceas
-```
+    ln -s /sys/class/leds/tp-link:green:lan2/brightness /tmp/date
+    ln -s /sys/class/leds/tp-link:green:lan3/brightness /tmp/ceas
 
-```ruby
-require 'redcarpet'
-markdown = Redcarpet.new("Hello World!")
-puts markdown.to_html
-```
 
 Now I need a little scrip that will write the stdin to the lcd, no formating.
 You have to know in advance what kind of LCD this is (1x16,1x8,2x16,4x20, etc.)
