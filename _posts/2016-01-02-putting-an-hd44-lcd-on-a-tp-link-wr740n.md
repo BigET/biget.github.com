@@ -49,6 +49,12 @@ ln -s /sys/class/leds/tp-link:green:lan2/brightness /tmp/date
 ln -s /sys/class/leds/tp-link:green:lan3/brightness /tmp/ceas
 ```
 
+```ruby
+require 'redcarpet'
+markdown = Redcarpet.new("Hello World!")
+puts markdown.to_html
+```
+
 Now I need a little scrip that will write the stdin to the lcd, no formating.
 You have to know in advance what kind of LCD this is (1x16,1x8,2x16,4x20, etc.)
 
