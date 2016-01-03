@@ -29,6 +29,6 @@ So I have made my own 1wire master. The goal was to be dead simple to use.
 
 Here is the schematic.:
 
-![alt text](/assets/schemas/Uart21wire.png)
+![alt text](/assets/schemas/Uart21wire.png "Schematic for Uart <-> 1Wire")
 
 
